@@ -1,14 +1,13 @@
 from sqlalchemy.ext.hybrid import hybrid_property
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
-from app import bcrypt
 
 db = SQLAlchemy()
 
 car_users = db.Table(
     "car_user",
     db.Column("car_id", db.ForeignKey("cars.id"), primary_key=True),
-    db.Column("user_id", db.ForeignKey("users.id", primary_key=True))
+    db.Column("user_id", db.ForeignKey("users.id"), primary_key=True)
 )
 
 class Car(db.Model, SerializerMixin):
@@ -25,6 +24,7 @@ class Car(db.Model, SerializerMixin):
     image_url = db.Column(db.String)
     reviews = db.relationship("Review", backref="car")
     users = db.relationship("User", secondary=car_users, back_populates="cars")
+    # serialize_rules = ("-reviews.car",)
 
     def __repr__(self):
         return f"Car {self.name} ID: {self.id}"
@@ -38,19 +38,7 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String, unique=True)
     reviews = db.relationship("Review", backref="user")
     cars = db.relationship("Car", secondary=car_users, back_populates="users")
-
-    @hybrid_property
-    def password_hash(self):
-        return AttributeError("Password hash should not be viewed")
-    
-    @password_hash.setter
-    def password_hash(self, password):
-        password_hash = bcrypt.generate_password_hash(password.encode("utf-8"))
-        self._password_hash = password_hash.decode("utf-8")
-
-    def aunthenticate(self, password):
-        return bcrypt.check_password_hash(
-            self._password_hash, password.decode("utf-8"))
+    # serialize_rules = ("-reviews.user",)
 
     def __repr__(self):
         return f"User {self.username} ID: {self.id}"
@@ -61,8 +49,9 @@ class Review(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     comments = db.Column(db.String)
     rating = db.Column(db.Integer)
-    car_id = db.Column(db.Integer, db.ForiegnKey("cars.id"))
+    car_id = db.Column(db.Integer, db.ForeignKey("cars.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    # serialize_rules = ("-car.reviews", "-user.reviews",)
 
     def __repr__(self):
         return f"Review {self.id} | comment: {self.comments}"
