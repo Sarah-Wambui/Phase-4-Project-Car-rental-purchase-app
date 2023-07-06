@@ -23,8 +23,7 @@ class Car(db.Model, SerializerMixin):
     status = db.Column(db.String)
     image_url = db.Column(db.String)
     reviews = db.relationship("Review", backref="car")
-    users = db.relationship("User", secondary=car_users, back_populates="cars")
-    # serialize_rules = ("-reviews.car",)
+    serialize_rules = ("-users.cars",)
 
     def __repr__(self):
         return f"Car {self.name} ID: {self.id}"
@@ -37,8 +36,7 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True)
     reviews = db.relationship("Review", backref="user")
-    cars = db.relationship("Car", secondary=car_users, back_populates="users")
-    # serialize_rules = ("-reviews.user",)
+    serialize_rules = ("-cars.users",)
 
     def __repr__(self):
         return f"User {self.username} ID: {self.id}"
@@ -51,7 +49,7 @@ class Review(db.Model, SerializerMixin):
     rating = db.Column(db.Integer)
     car_id = db.Column(db.Integer, db.ForeignKey("cars.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    # serialize_rules = ("-car.reviews", "-user.reviews",)
+    serialize_rules = ("-car.reviews", "-user.reviews",)
 
     def __repr__(self):
         return f"Review {self.id} | comment: {self.comments}"
