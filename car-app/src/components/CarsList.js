@@ -18,7 +18,7 @@ function CarsList({ cars }) {
 
 
     return (
-        <div>
+        <div className = "cars-container">
             {cars.map((car) => (
                 <CarItem key={car.id} car={car} onUpdateCar={handleUpdateCar} />
             ))}

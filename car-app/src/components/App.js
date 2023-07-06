@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Header from './Header';
+import NavBar from './NavBar';
 import CarsList from './CarsList';
 import "./style.css";
 import CarAddForm from './CarAddForm';
@@ -6,8 +8,11 @@ import CarAddForm from './CarAddForm';
 
 
 
+
+
 function App() {
     const [cars, setCars] = useState([]);
+    const [category, setCategory] = useState("all");
 
     console.log(cars)
 
@@ -25,6 +30,18 @@ function App() {
     const handleAddCar = (newCar) => {
         setCars([...cars, newCar]);
     };
+    const onCategoryClick = (category) => {
+        setCategory(category);
+    };
+    function handleSearch(filteredCars) {
+        setCars(filteredCars);
+    }
+
+    const filteredCars =
+        category === "all"
+            ? cars
+            : cars.filter((car) => car.category === category);
+
 
 
 
@@ -32,9 +49,15 @@ function App() {
 
     return (
         <div>
-
-            <CarsList cars={cars} />
+            <Header />
+            <NavBar
+                onCategoryClick={onCategoryClick}
+                cars={cars}
+                onSearch={handleSearch}
+            />
+            <CarsList cars={filteredCars} />
             <CarAddForm onAddCar={handleAddCar} />
+
 
 
 
