@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import CarsList from './CarsList';
+import React, { useState } from "react";
+import logo from './logo.svg';
+import './App.css';
+import { Login } from "./Login";
+import { Register } from "./Register";
 
 function App() {
-    const [cars, setCars] = useState([]);
+  const [currentForm, setCurrentForm] = useState('login');
 
-    useEffect(() => {
-        fetch("http://localhost:3001/cars")
-            .then((resp) => resp.json())
-            .then((cars) => {
-                setCars(cars);
-            });
-    }, []);
+  const toggleForm = (formName) => {
+    setCurrentForm(formName);
+  }
 
-
-
-    return (
-        <div>
-
-            <CarsList cars={cars} />
-
-        </div>
-    );
-
+  return (
+    <div className="App">
+      {
+        currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />
+      }
+    </div>
+  );
 }
-export default App
+
+export default App;
