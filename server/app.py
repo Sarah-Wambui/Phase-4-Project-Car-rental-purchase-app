@@ -1,5 +1,5 @@
 #!usr/bin/env python3
-from flask import  make_response, jsonify, request
+from flask import  make_response, jsonify, request, session
 from flask_restful import Resource
 from config import  db, api, app
 from models import  User, Car, Review
@@ -18,7 +18,8 @@ api.add_resource(Users, "/users")
 class SignUp(Resource):
     def post(self):
         new_user = User(
-            username = request.form["username"]
+            username = request.form["username"],
+            email = request.form["email"],
         )
         new_user.password_hash = request.form["_password_hash"]
         db.session.add(new_user)
@@ -28,7 +29,32 @@ api.add_resource(SignUp, "/signup")
 
 class Login(Resource):
     def post(self):
-        pass
+        
+        username= request.form["username"]
+        password_hash = request.form["_password_hash"]
+
+        user = User.query.filter(User.username == username).first()
+
+        if user:
+            if user.authenticate(password_hash):
+                session["user_id"] = user.id
+                return make_response(jsonify(user.to_dict()))
+        return make_response(jsonify({"error": "401: Unthorized"}), 401)
+api.add_resource(Login, "/login")
+
+class Logout(Resource):
+    def delete(self):            
+            session["user_id"] = None
+            return {"message": "user logged out successfuly"}, 200
+api.add_resource(Logout, "/logout")
+
+class CheckSession(Resource):
+    def get(self):
+        if session.get("user_id"):
+            user = User.query.filter(User.id == session["user_id"]).first()
+            return make_response(jsonify(user.to_dict()), 200)
+        return {}, 401
+api.add_resource(CheckSession, "/check_session")
 
 class Cars(Resource):
     def get(self):
