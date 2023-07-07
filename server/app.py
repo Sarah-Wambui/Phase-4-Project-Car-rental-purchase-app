@@ -26,6 +26,9 @@ class SignUp(Resource):
         return make_response(jsonify(new_user.to_dict()), 201)
 api.add_resource(SignUp, "/signup")
 
+class Login(Resource):
+    def post(self):
+        pass
 
 class Cars(Resource):
     def get(self):
