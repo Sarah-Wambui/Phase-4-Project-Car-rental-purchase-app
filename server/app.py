@@ -1,79 +1,49 @@
 #!usr/bin/env python3
-from flask import Flask, jsonify, make_response, request
-from flask_migrate import Migrate
-from flask_bcrypt import Bcrypt
-from models import db, Car, User, Review
-from flask_restful import Api, Resource
-from flask_cors import CORS
-
-app = Flask(__name__)
-app.secret_key = b'\xa64\x16\xd5\x89\x14\xcd\x1b1\xcf\x82\x99$so'
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cars.db"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] =False
-app.json.compact = False
-CORS(app)
-
-migrate=Migrate(app, db)
-
-db.init_app(app)
-
-# cars - get_cars, create_car, delete_car, update_car
-# review - create_review, delete_review
-# user - create_user, delete_user
-
-api=Api(app)
+from flask import  make_response, jsonify, request
+from flask_restful import Resource
+from config import  db, api, app
+from models import  User, Car, Review
 
 class Index(Resource):
     def get(self):
-        return f'<h1>Heading</h1>'
+        return f'Welcome to Car/User/Review API'
 api.add_resource(Index, '/')
 
 class Users(Resource):
     def get(self):
         users = [user.to_dict() for user in User.query.all()]
-        return make_response(jsonify(users), 200)
+        return make_response(jsonify({"users": users}), 200)
+api.add_resource(Users, "/users")
 
+class SignUp(Resource):
     def post(self):
         new_user = User(
-            username=request.form["username"],
-            email=request.form["email"],
-            _password_hash=request.form["_password_hash"]
+            username = request.form["username"]
         )
+        new_user.password_hash = request.form["_password_hash"]
         db.session.add(new_user)
         db.session.commit()
-        return  make_response(jsonify(new_user.to_dict()), 201)
+        return make_response(jsonify(new_user.to_dict()), 201)
+api.add_resource(SignUp, "/signup")
 
-api.add_resource(Users, '/users')
 
 class Cars(Resource):
     def get(self):
         cars = [car.to_dict() for car in Car.query.all()]
-        return make_response(jsonify(cars), 200)
+        return make_response(jsonify({"cars": cars}), 200)
     
     def post(self):
-        new_car = Car(
+        new_car=Car(
             name = request.form["name"],
-            image_url = request.form['image_url'],
-            year = request.form['year'],
-            engine = request.form['engine'],
-            color = request.form['color'],
-            category = request.form['category'],
-            mileage = request.form['mileage']
+            color = request.form["color"],
+            year=request.form["year"],
+            engine=request.form["engine"],
+            mileage=request.form["mileage"],
+            category=request.form["category"]
         )
         db.session.add(new_car)
         db.session.commit()
         return make_response(jsonify(new_car.to_dict()), 201)
-
-    def patch(self, id):
-        car = Car.query.filter(id = id).first()
-        for attr in request.form:
-            setattr(car, attr, request.form[attr])
-        db.session.add(car)
-        db.session.commit()
-        return make_response(jsonify(car.to_dict()), 200)
-
-
-
 api.add_resource(Cars, '/cars')
 
 class CarByID(Resource):
