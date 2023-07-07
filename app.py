@@ -30,7 +30,20 @@ api.add_resource(Index, '/')
 
 class Users(Resource):
     def get(self):
-        pass
+        users = [user.to_dict() for user in User.query.all()]
+        return make_response(jsonify(users), 200)
+
+    def post(self):
+        new_user = User(
+            username=request.form["username"],
+            email=request.form["email"],
+            _password_hash=request.form["_password_hash"]
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return  make_response(jsonify(new_user.to_dict()), 201)
+
+api.add_resource(Users, '/users')
 
 class Cars(Resource):
     def get(self):
@@ -79,6 +92,34 @@ class CarByID(Resource):
         return make_response(jsonify({"message":"Car has been deleted successfully"}), 200)
 
 api.add_resource(CarByID, '/cars/<int:id>')
+
+class Reviews(Resource):
+    def get(self):
+        reviews = [review.to_dict() for review in Review.query.all()]
+        return make_response(jsonify(reviews), 200)
+
+    def post(self):
+        new_review = Review(
+            car_id=request.form["car_id"],
+            rating=request.form["rating"], 
+            comments=request.form["comments"]
+        )
+        db.session.add(new_review)
+        db.session.commit()
+        return make_response(jsonify(new_review.to_dict()), 201)
+
+api.add_resource(Reviews, '/reviews')
+
+class ReviewByID(Resource):
+    def delete(self, id):
+        review = Review.query.filter_by(id=id).first()
+        if not review:
+            return make_response(jsonify({"message": "Review not found"}), 404)
+        db.session.delete(review)
+        db.session.commit()
+        return make_response(jsonify({"message": "Review has been deleted successfully"}), 200)
+
+api.add_resource(ReviewByID, '/reviews/<int:id>')
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
