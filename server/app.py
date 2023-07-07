@@ -15,6 +15,18 @@ class Users(Resource):
         return make_response(jsonify({"users": users}), 200)
 api.add_resource(Users, "/users")
 
+class SignUp(Resource):
+    def post(self):
+        new_user = User(
+            username = request.form["username"]
+        )
+        new_user.password_hash = request.form["_password_hash"]
+        db.session.add(new_user)
+        db.session.commit()
+        return make_response(jsonify(new_user.to_dict()), 201)
+api.add_resource(SignUp, "/signup")
+
+
 class Cars(Resource):
     def get(self):
         cars = [car.to_dict() for car in Car.query.all()]
