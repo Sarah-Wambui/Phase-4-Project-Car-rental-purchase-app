@@ -1,23 +1,28 @@
-import React, { useState } from "react";
-import logo from './logo.svg';
-import './App.css';
-import { Login } from "./Login";
-import { Register } from "./Register";
+import React, { useState, useEffect } from 'react';
+//import CarsList from './CarsList';
+import Login  from './Login';
 
 function App() {
-  const [currentForm, setCurrentForm] = useState('login');
+    const [user, setUser] = useState(null);
 
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  }
+    useEffect(() => {
+        fetch("/check_session")
+            .then((resp) => resp.json())
+            .then((user) => {
+                setUser(user);
+            });
+    }, []);
 
-  return (
-    <div className="App">
-      {
-        currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />
-      }
-    </div>
-  );
+    if (!user) return <Login setUser={setUser}/>
+
+    return (
+        <div>
+
+            
+
+        </div>
+    );
+
 }
 
 export default App;
