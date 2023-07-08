@@ -1,0 +1,37 @@
+{
+  "cars": [
+    {
+      "id": 1,
+      "model": "Toyota Rav4",
+      "color": "red",
+      "year": "2016",
+      "engine": "Petrol 2.0L",
+      "mileage": "30000 kms",
+      "category": "sale",
+      "status": "Available",
+      "image": "https://soymotor.com/sites/default/files/imagenes/noticia/toyota_rav4_gr_sport_1.jpg"
+    },
+    {
+      "id": 2,
+      "model": "Mazda CX5",
+      "color": "white",
+      "year": "2015",
+      "engine": "Diesel 2.0L",
+      "mileage": "20000 kms",
+      "category": "rental",
+      "status": "Available",
+      "image": "https://imgcdn.oto.com/large/gallery/color/23/1595/mazda-cx-5-color-129851.jpg"
+    },
+    {
+      "model": "Mercedes",
+      "color": "Red",
+      "year": "2012",
+      "engine": "1590 cc",
+      "mileage": "35000kms",
+      "category": "",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4wERkWY76R2fTZ-DRChye9_srKRQCW2PTXy9rBEpK&s",
+      "status": "Available",
+      "id": 3
+    }
+  ]
+}
