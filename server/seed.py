@@ -150,3 +150,19 @@ with app.app_context():
         db.session.execute(statement)
         db.session.commit()
     db.session.commit()
+
+
+
+
+    # def post(self):
+    #     form = RegistrationForm(request.form)
+    #     if form.validate():
+    #         new_user = User(
+    #             username = form.username.data,
+    #             email = form.email.data,
+    #         )
+    #         new_user.password_hash = form.password.data
+    #         db.session.add(new_user)
+    #         db.session.commit()
+    #         return make_response(jsonify(new_user.to_dict()), 201)
+    #     return make_response(jsonify({"error": form.errors}), 400)

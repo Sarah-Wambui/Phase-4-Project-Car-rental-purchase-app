@@ -53,7 +53,7 @@ class CheckSession(Resource):
         if session.get("user_id"):
             user = User.query.filter(User.id == session["user_id"]).first()
             return make_response(jsonify(user.to_dict()), 200)
-        return {}, 401
+        return {"Login"}, 401
 api.add_resource(CheckSession, "/check_session")
 
 class Cars(Resource):
