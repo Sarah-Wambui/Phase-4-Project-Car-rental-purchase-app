@@ -4,13 +4,13 @@ import React, { useState } from "react";
 
 function CarUpdateForm({ car, onUpdateCar }) {
     const [formData, setFormData] = useState({
-        model: car.model,
-        color: car.color,
+        name: car.name,
+        color: "",
         year: car.year,
         engine: car.engine,
         mileage: car.mileage,
         category: car.category,
-        image: car.image,
+        image_url: car.image_url,
         status: car.status,
     });
 
@@ -25,7 +25,7 @@ function CarUpdateForm({ car, onUpdateCar }) {
 
     const handleSubmitForm = (event) => {
         event.preventDefault();
-        fetch(`http://localhost:4500/cars/${car.id}`, {
+        fetch(`/cars/${car.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -33,7 +33,9 @@ function CarUpdateForm({ car, onUpdateCar }) {
             body: JSON.stringify(formData),
         })
             .then((r) => r.json())
-            .then((updatedCar) => onUpdateCar(updatedCar));
+            .then((updatedCar) =>{
+                onUpdateCar(updatedCar)
+            });
     };
 
 
@@ -46,12 +48,12 @@ function CarUpdateForm({ car, onUpdateCar }) {
         <div id="form-container">
             <form id="form" onSubmit={handleSubmitForm}>
                 <div>
-                    <label htmlFor="model">Model:</label>
+                    <label htmlFor="name">Name:</label>
                     <input
                         type="text"
-                        id="model"
-                        name="model"
-                        value={formData.model}
+                        id="name"
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
                     />
                 </div>
@@ -110,12 +112,12 @@ function CarUpdateForm({ car, onUpdateCar }) {
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="image">Image:</label>
+                    <label htmlFor="image_url">image_url:</label>
                     <input
                         type="text"
-                        id="image"
-                        name="image"
-                        value={formData.image}
+                        id="image_url"
+                        name="image_url"
+                        value={formData.image_url}
                         onChange={handleChange}
                     />
                 </div>

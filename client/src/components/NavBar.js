@@ -1,6 +1,17 @@
 import React from "react";
 
-function NavBar({ onCategoryClick, cars, onSearch, onAddCarClick }) {
+function NavBar({ onCategoryClick, cars, onSearch, onAddCarClick , user, setUser}) {
+
+    function handleLogoutClick(){
+        fetch("/logout", {
+            method: "DELETE"
+        })
+        .then((r) => {
+            if (r.ok){
+                setUser(null)
+            }
+        })
+    }
     const handleCategoryClick = (category) => {
         onCategoryClick(category);
     };
@@ -43,6 +54,7 @@ function NavBar({ onCategoryClick, cars, onSearch, onAddCarClick }) {
                     Search
                 </button>
             </form>
+            <button onClick={handleLogoutClick}>Logout</button>
         </nav>
     );
 }

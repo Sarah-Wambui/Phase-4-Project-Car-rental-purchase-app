@@ -12,6 +12,8 @@ flask-restful = "*"
 faker = "*"
 flask-bcrypt = "*"
 flask-cors = "*"
+flask-wtf = "*"
+email-validator = "*"
 
 [dev-packages]
 

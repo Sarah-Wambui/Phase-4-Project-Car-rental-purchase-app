@@ -36,11 +36,11 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True)
     reviews = db.relationship("Review", backref="user")
-    serialize_rules = ("-cars.users",)
+    serialize_rules = ("-cars.users", "-_password_hash", )
 
     @hybrid_property
     def password_hash(self):
-        return AttributeError("Password hash should not be viewed")
+        raise AttributeError("Password hashes may not be viewed.")
     
     @password_hash.setter
     def password_hash(self, password):

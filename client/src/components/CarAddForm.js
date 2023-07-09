@@ -2,17 +2,17 @@
 
 import React, { useState } from "react";
 
-function CarAddForm({ onAddCar }) {
+function CarAddForm({ handleAddCar }) {
 
     const [formData, setFormData] = useState({
-        model: "",
+        name: "",
         color: "",
         year: "",
         engine: "",
         mileage: "",
         category: "",
         status: "",
-        imageurl: "",
+        image_url: "",
     });
 
     function handleSubmitForm(event) {
@@ -20,29 +20,29 @@ function CarAddForm({ onAddCar }) {
         // TODO: Send form data to server
 
         const carsData = {
-            model: formData.model,
+            name: formData.name,
             color: formData.color,
             year: formData.year,
             engine: formData.engine,
             mileage: formData.mileage,
             category: formData.category,
-            image: formData.image,
+            image_url: formData.image_url,
             status: formData.status,
         };
         setFormData({
-            model: "",
+            name: "",
             color: "",
             year: "",
             engine: "",
             mileage: "",
             category: "",
-            image: "",
+            image_url: "",
             status: "",
         });
         // // navigate to view submitted form
         // history.push("/submitted-form");
 
-        fetch("http://localhost:4500/cars", {
+        fetch("/cars", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -50,7 +50,7 @@ function CarAddForm({ onAddCar }) {
             body: JSON.stringify(carsData),
         })
             .then((r) => r.json())
-            .then((newCar) => onAddCar(newCar));
+            .then((newCar) => handleAddCar(newCar));
     }
 
     function handleChange(event) {
@@ -70,12 +70,12 @@ function CarAddForm({ onAddCar }) {
         <div id="form-container">
             <form id="form" onSubmit={handleSubmitForm}>
                 <div>
-                    <label htmlFor="model">Model:</label>
+                    <label htmlFor="name">Name:</label>
                     <input
                         type="text"
-                        id="model"
-                        name="model"
-                        value={formData.model}
+                        id="name"
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
                     />
                 </div>
@@ -134,12 +134,12 @@ function CarAddForm({ onAddCar }) {
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="image">Image:</label>
+                    <label htmlFor="image_url">Image_url:</label>
                     <input
                         type="text"
-                        id="image"
-                        name="image"
-                        value={formData.image}
+                        id="image_url"
+                        name="image_url"
+                        value={formData.image_url}
                         onChange={handleChange}
                     />
                 </div>
