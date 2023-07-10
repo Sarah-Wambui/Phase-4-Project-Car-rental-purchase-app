@@ -23,18 +23,6 @@ function ReviewForm() {
   
   function handleSubmit(e){
     e.preventDefault()
-    // fetch("/reviews",{
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    // .then((r) => r.json())
-    // .then((newReview)=> console.log(newReview))
-    // .catch((error) =>{
-    //   console.log(error)
-    // })
     const post ={
       method: "POST",
       headers: {
@@ -68,20 +56,26 @@ function ReviewForm() {
 
   return (
     <div>
-      <h2>Review Form</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="car_id">Car ID:</label>
-        <input type="text" id="car_id" name="car_id" value={formData.car_id} onChange={handleChange}/>
-        <label htmlFor="rating">Rating:</label>
-        <input type="text" id="rating" name="rating" value={formData.rating} onChange={handleChange}/>
-        <label htmlFor="comments">Comments:</label>
-        <input type="text" id="comments" name="comments" value={formData.comments} onChange={handleChange}/>
+      <form onSubmit={handleSubmit} id="review-form">
+        <h2>Review Form</h2>
+        <div id="add-review">
+          <label htmlFor="car_id">Car ID:</label>
+          <input type="text" id="car_id" name="car_id" value={formData.car_id} onChange={handleChange}/>
+          <label htmlFor="rating">Rating:</label>
+          <input type="text" id="rating" name="rating" value={formData.rating} onChange={handleChange}/>
+          <label htmlFor="comments">Comments:</label>
+          <input type="text" id="comments" name="comments" value={formData.comments} onChange={handleChange}/>
+        </div>
         <button type="submit">Submit</button>
       </form>
-
+      <div id="reviews">
       {reviews.map((review) =>{
         return  <ReviewItem  key={review.id} review={review} handleDelete={handleDelete} />
       })}
+
+      </div>
+
+     
 
     </div>
   )
