@@ -1,0 +1,293 @@
+.header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    font-style: italic;
+    color: red;
+    margin: 0;
+    white-space: nowrap;
+}
+.header h3{
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-style: italic; 
+}
+
+.header .logo {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(243, 33, 75);
+    padding: 1rem;
+    margin-top: 100px;
+}
+
+.navbar-container {
+    display: flex;
+    gap: 1rem;
+    padding-top: 50px
+}
+.navbar button{
+    background-color: white;
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+}
+.navbar h2{
+    color: black;
+    font-size: 2rem
+    transition color 0.3s;
+
+}
+.navbar h2:hover{
+    color: green
+}
+.navbar-link {
+    text-decoration: none;
+}
+
+
+button#category {
+    background-color: white;
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+#category button:hover {
+    background-color: #008d78;
+    color: #fff;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form input[type="text"] {
+    border: none;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+
+.cars-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+    gap: 10px;
+    background-color: whitesmoke;
+    justify-content: center;
+    align-items: center;
+   
+    
+}
+
+.car-item {
+    width: 80%;
+    height: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color:white;
+    border: 1px grey;
+    border-radius: 2px;
+    padding: 2px;
+    font-size: 20px;
+}
+
+.car-item button{
+    margin-left: 50px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.car-item img{
+width: 300px;
+height: 200px
+
+}
+#btn-delete{
+    background-color: red;
+}
+#btn-update{
+    background-color: green;
+}
+
+#form-container {
+    background-color: white;
+    width: 25%;
+    padding: 20px;
+    border-radius: 4px;
+    border: black solid 1px;
+    margin: auto;
+    margin-top: 10px;
+    
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+}
+
+#form div {
+    margin-bottom: 10px;
+}
+
+#form label {
+    font-weight: bold;
+}
+
+#form input,
+#form select {
+    width: 100%;
+    background-color: rgb(177, 172, 172);
+    border: none;
+    border-radius: 2px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+#btn{
+    margin-top: 10px;
+    background: coral;
+    padding: 5px;
+
+}
+#buton{
+    background: forestgreen;
+    padding: 5px;
+}
+#login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    border: 2px solid black;
+    border-radius: 30px;
+    margin: auto;
+    padding: 40px;
+    background: lightgrey;
+
+}
+
+#logins h2{
+    text-align: center;
+    font: italic 50px Georgia;
+    color:rgb(243, 33, 75);
+}
+
+#logins p{
+    text-align: center;
+    margin-top: 10px; 
+}
+#logins button{
+    padding: 10px;
+    background: green;
+    border-radius: 10px;
+    margin-left: 10px;
+
+}
+#login  h3{
+    text-decoration: underline;
+    font: bold 20px Times New Roman
+
+}
+
+#login button{
+    padding: 10px;
+    margin-top: 30px;
+    width: 30%;
+    background:#000;
+    color: #fff;
+    border-radius: 10px;
+
+}
+#login input{
+    margin-top: 10px;
+    padding: 15px;
+    width: 60%;
+    border-radius: 10px;
+
+}
+#login label{
+    margin-top: 20px;
+    width: 60%;
+    border-radius: 10px;
+    font: 20px Times New Roman;
+}
+
+#reviews{
+    margin: 2em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1em;
+}
+#reviews div{
+    border: 0.1em solid;
+    padding: 1em;
+}
+#review-form {
+    margin-top: 2em;
+    border: 0.1em solid;
+    padding: 1em;
+    background: lightgray;
+}
+#add-review label{
+    margin-left: 2em;
+    font: 1em Georgia;
+}
+
+#add-review input{
+    padding: 2em;
+    margin-left: 1em;
+    width: 20%;
+    border-radius: 1em;
+}
+#review-form h2{
+    text-align: center;
+    font: italic 2em Georgia;
+    color:rgb(243, 33, 75);
+}
+#review-form button{
+    margin-left: 45em;
+    padding: 1em;
+    background: coral;
+    border-radius: 1em;
+    margin-top: 1em;
+}
