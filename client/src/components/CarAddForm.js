@@ -19,26 +19,26 @@ function CarAddForm({ handleAddCar }) {
         event.preventDefault();
         // TODO: Send form data to server
 
-        const carsData = {
-            name: formData.name,
-            color: formData.color,
-            year: formData.year,
-            engine: formData.engine,
-            mileage: formData.mileage,
-            category: formData.category,
-            image_url: formData.image_url,
-            status: formData.status,
-        };
-        setFormData({
-            name: "",
-            color: "",
-            year: "",
-            engine: "",
-            mileage: "",
-            category: "",
-            image_url: "",
-            status: "",
-        });
+        // const carsData = {
+        //     name: formData.name,
+        //     color: formData.color,
+        //     year: formData.year,
+        //     engine: formData.engine,
+        //     mileage: formData.mileage,
+        //     category: formData.category,
+        //     image_url: formData.image_url,
+        //     status: formData.status,
+        // };
+        // setFormData({
+        //     name: "",
+        //     color: "",
+        //     year: "",
+        //     engine: "",
+        //     mileage: "",
+        //     category: "",
+        //     image_url: "",
+        //     status: "",
+        // });
         // // navigate to view submitted form
         // history.push("/submitted-form");
 
@@ -47,7 +47,7 @@ function CarAddForm({ handleAddCar }) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(carsData),
+            body: JSON.stringify(formData),
         })
             .then((r) => r.json())
             .then((newCar) => handleAddCar(newCar));
@@ -71,34 +71,17 @@ function CarAddForm({ handleAddCar }) {
             <form id="form" onSubmit={handleSubmitForm}>
                 <div>
                     <label htmlFor="name">Name:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                    />
+                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
                 </div>
 
                 <div>
                     <label htmlFor="color">Color:</label>
-                    <input
-                        type="text"
-                        id="color"
-                        name="color"
-                        value={formData.color}
-                        onChange={handleChange}
-                    />
+                    <input type="text" id="color" name="color" value={formData.color} onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="year">Year:</label>
-                    <input
-                        type="text"
-                        id="year"
-                        name="year"
-                        value={formData.year}
-                        onChange={handleChange}
-                    />
+                    <input type="text" id="year" name="year" value={formData.year} onChange={handleChange}
+/>
                 </div>
                 <div>
                     <label htmlFor="engine">Engine:</label>
@@ -156,7 +139,7 @@ function CarAddForm({ handleAddCar }) {
                         <option value="Unavailable">Unavailable</option>
                     </select>
                 </div>
-                <button type="submit">Add Car</button>
+                <button id="buton" type="submit">Add Car</button>
             </form>
         </div>
     );

@@ -7,12 +7,12 @@ function Login({setUser}) {
 
 
   return (
-    <div>
+    <div id="logins" >
         <h2>CarMarket</h2>
         {showLogin ?  (
             <> 
                <LoginForm setUser={setUser} />
-              <p>Don't have an acoount? Sign up here
+              <p>Don't have an acoount? Sign up here:
                 <button onClick={() => setShowLogin(false)} >Sign Up</button>
               </p>
             </>

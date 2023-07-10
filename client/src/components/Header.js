@@ -1,7 +1,7 @@
 import React from "react";
 
 function Header() {
-    const websiteName = "CarLink & Rentals";
+    const websiteName = "CarMarket";
     const slogan = "Ride in Style, Rent with Confidence";
     return (
         <header className="header">

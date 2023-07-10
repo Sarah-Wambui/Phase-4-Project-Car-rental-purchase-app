@@ -126,10 +126,12 @@ class Reviews(Resource):
         return make_response(jsonify(reviews), 200)
 
     def post(self):
+        data = request.get_json()
+
         new_review = Review(
-            car_id=request.form["car_id"],
-            rating=request.form["rating"], 
-            comments=request.form["comments"]
+            car_id=data["car_id"],
+            rating=data["rating"], 
+            comments=data["comments"],
         )
         db.session.add(new_review)
         db.session.commit()

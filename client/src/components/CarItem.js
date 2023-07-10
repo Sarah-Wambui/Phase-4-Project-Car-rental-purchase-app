@@ -34,7 +34,7 @@ function CarItem({ car, onUpdateCar , handleDelete}) {
 
 
                 {showUpdateForm && (
-                    <CarUpdateForm car={car} onUpdateCar={onUpdateCar} />
+                    <CarUpdateForm car={car} onUpdateCar={onUpdateCar} setShowUpdateForm={setShowUpdateForm}/>
                 )}
             </div>
         </div>

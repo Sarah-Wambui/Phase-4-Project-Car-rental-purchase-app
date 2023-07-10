@@ -27,7 +27,8 @@ function SignUp({setUser}) {
 
   return (
     <div>
-        <form action='/signup' onSubmit={handleSubmit}>
+        <form action='/signup' onSubmit={handleSubmit} id="login">
+            <h3>Sign Up</h3>
             <label htmlFor="username">Username:</label>
             <input 
             type="text" 
@@ -49,7 +50,7 @@ function SignUp({setUser}) {
             id="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} required/>
-            <button>Submit</button>
+            <button id="loginbtn">Submit</button>
         </form>
        
     </div>

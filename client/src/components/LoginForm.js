@@ -29,7 +29,8 @@ function LoginForm({setUser}) {
 }
   return (
     <div>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit} id="login">
+        <h3>Login</h3>
         <label htmlFor="username">Username:</label>
         <input 
         type="text" 
@@ -46,7 +47,7 @@ function LoginForm({setUser}) {
         value={password} 
         onChange={(e) => setPassword(e.target.value)} 
         autoComplete='off' required />
-        <button type="submit">Submit</button>
+        <button type="submit" id="loginbtn">Submit</button>
       </form>
       {error && <p>{error}</p>}
     </div>

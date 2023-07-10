@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 
-function CarUpdateForm({ car, onUpdateCar }) {
+function CarUpdateForm({ car, onUpdateCar, setShowUpdateForm }) {
     const [formData, setFormData] = useState({
         name: car.name,
         color: "",
@@ -134,7 +134,8 @@ function CarUpdateForm({ car, onUpdateCar }) {
                         <option value="Unavailable">Unavailable</option>
                     </select>
                 </div>
-                <button type="submit">Update Car</button>
+                <button id="buton"type="submit">Update Car</button>
+                <button id="btn" onClick={() => setShowUpdateForm(false)}>Hide Form</button>
             </form>
         </div>
     );
