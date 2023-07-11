@@ -14,7 +14,8 @@ function App() {
     const [cars, setCars] = useState([]);
     const [category, setCategory] = useState("all");
 
-    // console.log(user)
+    console.log(user)
+    console.log(cars)
     useEffect(() => {
         fetch("/cars")
             .then((resp) => resp.json())

@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 
 function CarAddForm({ handleAddCar }) {
-
     const [formData, setFormData] = useState({
         name: "",
         color: "",
@@ -17,31 +16,6 @@ function CarAddForm({ handleAddCar }) {
 
     function handleSubmitForm(event) {
         event.preventDefault();
-        // TODO: Send form data to server
-
-        // const carsData = {
-        //     name: formData.name,
-        //     color: formData.color,
-        //     year: formData.year,
-        //     engine: formData.engine,
-        //     mileage: formData.mileage,
-        //     category: formData.category,
-        //     image_url: formData.image_url,
-        //     status: formData.status,
-        // };
-        // setFormData({
-        //     name: "",
-        //     color: "",
-        //     year: "",
-        //     engine: "",
-        //     mileage: "",
-        //     category: "",
-        //     image_url: "",
-        //     status: "",
-        // });
-        // // navigate to view submitted form
-        // history.push("/submitted-form");
-
         fetch("/cars", {
             method: "POST",
             headers: {

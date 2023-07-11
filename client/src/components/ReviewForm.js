@@ -20,6 +20,10 @@ function ReviewForm() {
 
   },[])
 
+  function handleAdd(newReview){
+    setReviews([...reviews, newReview])
+  }
+
   
   function handleSubmit(e){
     e.preventDefault()
@@ -32,8 +36,9 @@ function ReviewForm() {
     } 
     fetch("/reviews", post)
     .then(resp => resp.json())
-    .then(data => console.log(data))
+    .then(data => handleAdd(data))
   }
+
 
   function handleChange(event) {
     setFormData({

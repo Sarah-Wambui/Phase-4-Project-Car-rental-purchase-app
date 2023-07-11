@@ -3,6 +3,8 @@ from faker import Faker
 from app import app
 from random import randint, choice as rc
 
+# db.init_app(app)
+
 fake = Faker()
 
 with app.app_context():
@@ -138,18 +140,18 @@ with app.app_context():
         car.review = r
         reviews.remove(r)
         
-    combinations = set()
-    for _ in range(10):
-        user_id = randint(1, 5)
-        car_id = randint(1, 10)
-        if (user_id, car_id) in combinations:
-            continue
-        combinations.add((user_id, car_id))
-        car_user_data = {"user_id": user_id, "car_id": car_id}
-        statement = db.insert(car_users).values(car_user_data)
-        db.session.execute(statement)
-        db.session.commit()
-    db.session.commit()
+    # combinations = set()
+    # for _ in range(10):
+    #     user_id = randint(1, 5)
+    #     car_id = randint(1, 10)
+    #     if (user_id, car_id) in combinations:
+    #         continue
+    #     combinations.add((user_id, car_id))
+    #     car_user_data = {"user_id": user_id, "car_id": car_id}
+    #     statement = db.insert(car_users).values(car_user_data)
+    #     db.session.execute(statement)
+    #     db.session.commit()
+    # db.session.commit()
 
 
 

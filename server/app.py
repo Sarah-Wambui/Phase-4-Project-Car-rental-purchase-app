@@ -1,14 +1,18 @@
 #!usr/bin/env python3
-from flask import  make_response, jsonify, request, session
+from flask import  make_response, jsonify, request, session, render_template
 from flask_restful import Resource
 from config import  db, api, app
 from models import  User, Car, Review
 from sqlalchemy.exc import IntegrityError
 
-class Index(Resource):
-    def get(self):
-        return f'Welcome to Car/User/Review API'
-api.add_resource(Index, '/')
+@app.route('/')
+@app.route('/<int:id>')
+def index(id=0):
+    return render_template("index.html")
+# class Index(Resource):
+#     def get(self):
+#         return f'Welcome to Car/User/Review API'
+# api.add_resource(Index, '/')
 
 class Users(Resource):
     def get(self):
