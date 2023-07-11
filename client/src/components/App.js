@@ -67,7 +67,7 @@ function App() {
             <main>
                
                     <Routes>
-                        <Route  exact path="/cars" element={<CarsList cars={filteredCars}    setCars={setCars}  handleDelete={handleDelete} />}></Route>
+                        <Route  exact path="/" element={<CarsList cars={filteredCars}    setCars={setCars}  handleDelete={handleDelete} />}></Route>
                         <Route path="/review" element={<ReviewForm/>}></Route>
                         <Route path="/new" element={<CarAddForm handleAddCar={handleAddCar} />}></Route>
 

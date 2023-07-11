@@ -39,7 +39,7 @@ function NavBar({ onCategoryClick, cars, onSearch, setShowAddForm, user, setUser
        
            
             <nav className="navbar">
-                <Link to="/cars" className="navbar-link"><h2>Home</h2></Link>
+                <Link to="/" className="navbar-link"><h2>Home</h2></Link>
                 <Link to="/new" className="navbar-link"><h2> New-Car</h2></Link>
                 <Link to="/review"className="navbar-link"><h2>Reviews</h2></Link>
                 <div className="navbar-container">
